@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.rosatel.rosatel_api.models.Producto;
 import com.api.rosatel.rosatel_api.services.ProductoService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -21,6 +22,11 @@ public class ProductoController {
     @GetMapping
     public List<Producto> getProductos() {
         return productoService.getProductoRepository();
+    }
+    
+    @GetMapping("/{id}")
+    public Producto getMethodName(@PathVariable Integer id) {
+        return productoService.getProductoById(id);
     }
     
     

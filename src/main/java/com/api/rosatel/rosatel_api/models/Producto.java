@@ -1,11 +1,16 @@
 package com.api.rosatel.rosatel_api.models;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name = "producto")
 public class Producto {
     @Id
@@ -20,12 +25,10 @@ public class Producto {
     private int stock;
 
     @ManyToOne
-    @JoinColumn(name = "idCategoria")
-    private Categoria categoria;
-
-    @ManyToOne
-    @JoinColumn(name = "idSubCategoria")
+    @JoinColumn(name = "idSubCategoria", insertable = false, updatable = false)
+    @JsonBackReference
     private SubCategoria subCategoria;
+    private Integer idSubCategoria;
 
     @ManyToMany
     @JoinTable(
