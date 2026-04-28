@@ -1,0 +1,19 @@
+package com.api.rosatel.rosatel_api.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.api.rosatel.rosatel_api.models.Producto;
+import com.api.rosatel.rosatel_api.repositories.ProductoRepository;
+
+@Service
+public class ProductoService {
+    @Autowired
+    private ProductoRepository productoRepository;
+
+    public List<Producto> getProductoRepository() {
+        return productoRepository.findAll();
+    }
+}
