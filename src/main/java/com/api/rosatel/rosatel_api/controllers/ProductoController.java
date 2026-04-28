@@ -3,14 +3,15 @@ package com.api.rosatel.rosatel_api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.api.rosatel.rosatel_api.models.ApiResponse;
 import com.api.rosatel.rosatel_api.models.Producto;
 import com.api.rosatel.rosatel_api.services.ProductoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -20,13 +21,17 @@ public class ProductoController {
     private ProductoService productoService;
 
     @GetMapping
-    public List<Producto> getProductos() {
-        return productoService.getProductoRepository();
+    public ResponseEntity<ApiResponse<List<Producto>>> getProductos() {
+        List<Producto> productos = productoService.getProductoRepository();
+        ApiResponse<List<Producto>> response = new ApiResponse<List<Producto>>("success", "Productos obtenidos exitosamente", productos);
+        return ResponseEntity.ok(response);
     }
     
     @GetMapping("/{id}")
-    public Producto getMethodName(@PathVariable Integer id) {
-        return productoService.getProductoById(id);
+    public ResponseEntity<ApiResponse<Producto>> getMethodName(@PathVariable Integer id) {
+        Producto producto = productoService.getProductoById(id);
+        ApiResponse<Producto> response = new ApiResponse<Producto>("success", "Producto obtenido exitosamente", producto);
+        return ResponseEntity.ok(response);
     }
     
     
