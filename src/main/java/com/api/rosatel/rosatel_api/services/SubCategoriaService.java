@@ -16,4 +16,8 @@ public class SubCategoriaService {
     public List<SubCategoria> getSubCategoriaRepository() {
         return subCategoriaRepository.findAll();
     }
+
+    public SubCategoria getSubCategoriaById(Integer id) {
+        return subCategoriaRepository.findById(id).orElse(null);
+    }
 }

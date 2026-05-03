@@ -2,6 +2,8 @@ package com.api.rosatel.rosatel_api.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,5 +17,6 @@ public class Color {
     private String detalle;
 
     @ManyToMany(mappedBy = "colores")
+    @JsonBackReference("producto-colores")
     private List<Producto> productos;
 }

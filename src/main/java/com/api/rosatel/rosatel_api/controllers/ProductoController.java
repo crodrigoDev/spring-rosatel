@@ -23,14 +23,42 @@ public class ProductoController {
     @GetMapping
     public ResponseEntity<ApiResponse<List<Producto>>> getProductos() {
         List<Producto> productos = productoService.getProductoRepository();
-        ApiResponse<List<Producto>> response = new ApiResponse<List<Producto>>("success", "Productos obtenidos exitosamente", productos);
+        ApiResponse<List<Producto>> response = new ApiResponse<List<Producto>>(
+            "success", 
+            "Productos obtenidos exitosamente", 
+            productos);
         return ResponseEntity.ok(response);
     }
     
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<Producto>> getMethodName(@PathVariable Integer id) {
         Producto producto = productoService.getProductoById(id);
-        ApiResponse<Producto> response = new ApiResponse<Producto>("success", "Producto obtenido exitosamente", producto);
+        ApiResponse<Producto> response = new ApiResponse<Producto>(
+            "success", 
+            "Producto obtenido exitosamente", 
+            producto);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/subcategoria/{idSubCategoria}")
+    public ResponseEntity<ApiResponse<List<Producto>>> getProductosBySubCategoria(
+            @PathVariable Integer idSubCategoria) {
+        List<Producto> productos = productoService.getProductosBySubCategoria(idSubCategoria);
+        ApiResponse<List<Producto>> response = new ApiResponse<List<Producto>>(
+                "success",
+                "Productos obtenidos exitosamente",
+                productos);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/categoria/{idCategoria}")
+    public ResponseEntity<ApiResponse<List<Producto>>> getProductosByCategoria(
+            @PathVariable Integer idCategoria) {
+        List<Producto> productos = productoService.getProductosByCategoria(idCategoria);
+        ApiResponse<List<Producto>> response = new ApiResponse<List<Producto>>(
+                "success",
+                "Productos obtenidos exitosamente",
+                productos);
         return ResponseEntity.ok(response);
     }
     
