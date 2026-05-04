@@ -20,4 +20,13 @@ public class SubCategoriaService {
     public SubCategoria getSubCategoriaById(Integer id) {
         return subCategoriaRepository.findById(id).orElse(null);
     }
+
+    public SubCategoria createSubCategoria(SubCategoria subCategoria) {
+        return subCategoriaRepository.save(subCategoria);
+    }
+
+    public SubCategoria updateSubCategoria(Integer id, SubCategoria subCategoria) {
+        subCategoria.setId(id);
+        return subCategoriaRepository.save(subCategoria);
+    }
 }

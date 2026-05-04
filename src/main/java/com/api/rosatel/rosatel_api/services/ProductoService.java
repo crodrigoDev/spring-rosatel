@@ -28,4 +28,13 @@ public class ProductoService {
     public List<Producto> getProductosByCategoria(Integer idCategoria) {
         return productoRepository.findBySubCategoria_IdCategoria(idCategoria);
     }
+
+    public Producto createProducto(Producto producto) {
+        return productoRepository.save(producto);
+    }
+
+    public Producto updateProducto(Integer id, Producto producto) {
+        producto.setId(id);
+        return productoRepository.save(producto);
+    }
 }

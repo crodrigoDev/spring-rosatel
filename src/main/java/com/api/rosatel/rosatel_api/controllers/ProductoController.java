@@ -12,6 +12,9 @@ import com.api.rosatel.rosatel_api.models.Producto;
 import com.api.rosatel.rosatel_api.services.ProductoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
@@ -59,6 +62,28 @@ public class ProductoController {
                 "success",
                 "Productos obtenidos exitosamente",
                 productos);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping
+    public ResponseEntity<ApiResponse<Producto>> createProducto(@RequestBody Producto producto) {
+        Producto created = productoService.createProducto(producto);
+        ApiResponse<Producto> response = new ApiResponse<Producto>(
+            "success",
+            "Producto creado exitosamente",
+            created);
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<Producto>> updateProducto(
+            @PathVariable Integer id,
+            @RequestBody Producto producto) {
+        Producto updated = productoService.updateProducto(id, producto);
+        ApiResponse<Producto> response = new ApiResponse<Producto>(
+            "success",
+            "Producto actualizado exitosamente",
+            updated);
         return ResponseEntity.ok(response);
     }
     

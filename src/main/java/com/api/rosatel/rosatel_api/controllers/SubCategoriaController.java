@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,6 +40,29 @@ public class SubCategoriaController {
                 "success",
                 "Subcategoria obtenida exitosamente",
                 subCategoria);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping
+    public ResponseEntity<ApiResponse<SubCategoria>> createSubCategoria(
+            @RequestBody SubCategoria subCategoria) {
+        SubCategoria created = subCategoriaService.createSubCategoria(subCategoria);
+        ApiResponse<SubCategoria> response = new ApiResponse<SubCategoria>(
+                "success",
+                "Subcategoria creada exitosamente",
+                created);
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<SubCategoria>> updateSubCategoria(
+            @PathVariable Integer id,
+            @RequestBody SubCategoria subCategoria) {
+        SubCategoria updated = subCategoriaService.updateSubCategoria(id, subCategoria);
+        ApiResponse<SubCategoria> response = new ApiResponse<SubCategoria>(
+                "success",
+                "Subcategoria actualizada exitosamente",
+                updated);
         return ResponseEntity.ok(response);
     }
 }

@@ -20,4 +20,13 @@ public class CategoriaService {
     public Categoria getCategoriaById(Integer id) {
         return categoriaRepository.findById(id).orElse(null);
     }
+
+    public Categoria createCategoria(Categoria categoria) {
+        return categoriaRepository.save(categoria);
+    }
+
+    public Categoria updateCategoria(Integer id, Categoria categoria) {
+        categoria.setId(id);
+        return categoriaRepository.save(categoria);
+    }
 }

@@ -2,7 +2,7 @@ package com.api.rosatel.rosatel_api.models;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -12,6 +12,7 @@ import lombok.Data;
 @Table(name = "producto")
 public class Producto {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "nombre", nullable = false)
     private String nombre;
@@ -34,6 +35,6 @@ public class Producto {
         joinColumns = @JoinColumn(name = "idProducto"),
         inverseJoinColumns = @JoinColumn(name = "idColor")
     )
-    @JsonManagedReference("producto-colores")
+    @JsonIgnoreProperties("productos")
     private List<Color> colores;
 }
